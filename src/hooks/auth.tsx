@@ -1,6 +1,5 @@
 import api from "../services/api";
 import jwt_decode from "jwt-decode";
-
 interface AuthInterface {
   getToken: () => string;
   signIn: (username: string, password: string) => Promise<void>;
@@ -35,13 +34,11 @@ function useProvideAuth() {
 
   const getToken = () => {
     const token = localStorage.getItem("@shortner-token") || "";
-    console.log(token);
     return token;
   };
 
   const isAuthenticated = () => {
-    const token = localStorage.getItem("@shortner-token") || "";
-    console.log(token);
+    const token = getToken();
     if (token) {
       const { exp } = jwt_decode<{ exp: number }>(token);
       console.log(exp);
