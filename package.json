@@ -6,9 +6,11 @@
 	"license": "MIT",
 	"private": false,
 	"dependencies": {
+		"@types/react-router-dom": "^5.1.7",
 		"@types/styled-components": "^5.1.7",
 		"axios": "^0.21.1",
 		"dotenv": "^8.2.0",
+		"jwt-decode": "^3.1.2",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
 		"react-icons": "^4.2.0",
@@ -38,11 +40,7 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
+		"production": [ ">0.2%", "not dead", "not op_mini all" ],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
