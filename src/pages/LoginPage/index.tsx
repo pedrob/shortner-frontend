@@ -9,7 +9,8 @@ import {
   InputButton,
   Form,
   RegisterLink,
-  Logo
+  Logo,
+  LogoIcon
 } from "./styles";
 
 interface Inputs {
@@ -22,8 +23,8 @@ const LoginPage: React.FC = () => {
   const { push } = useHistory();
   const { register, handleSubmit, errors } = useForm<Inputs>();
   const onSubmit = async (data: Inputs) => {
-    console.log(data);
-    await signIn("pedrob", "cccc1234");
+    //TODO: add error tostify
+    await signIn(data.username, data.password);
     push("/");
   };
 
@@ -31,7 +32,10 @@ const LoginPage: React.FC = () => {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Logo>
-          Shortner
+          <div>
+            <LogoIcon />
+            Shortner
+          </div>
           <span>Encurtador de links</span>
         </Logo>
         <Input
@@ -41,34 +45,39 @@ const LoginPage: React.FC = () => {
           placeholder="Nome de usuário"
           ref={register({
             required: true,
-            min: 4,
-            max: 20
+            minLength: 4,
+            maxLength: 20
           })}
         />
         {errors.username && errors.username.type === "required" && (
           <span className="errorText">Campo obrigatório</span>
         )}
-        {errors.username && errors.username.type === "min" && (
+        {errors.username && errors.username.type === "minLength" && (
           <span className="errorText">
             Nome de usuário muito curto (menor que 4)
           </span>
         )}
-        {errors.username && errors.username.type === "max" && (
+        {errors.username && errors.username.type === "maxLength" && (
           <span className="errorText">
             Nome de usuário muito longo (maior que 20)
           </span>
         )}
         <Input
+          className={errors.password ? "error" : ""}
           name="password"
           defaultValue=""
           placeholder="Senha"
           type="password"
           ref={register({
-            required: true
+            required: true,
+            minLength: 6
           })}
         />
         {errors.password && errors.password.type === "required" && (
-          <span>Padrão de password inválido</span>
+          <span className="errorText">Campo obrigatório</span>
+        )}
+        {errors.password && errors.password.type === "minLength" && (
+          <span className="errorText">Senha muito curta (menor que 6)</span>
         )}
         <RegisterLink to="/registrar">
           Não possui conta, registre-se aqui

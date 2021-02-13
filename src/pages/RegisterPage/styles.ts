@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { MdShortText } from "react-icons/md";
 
 export const Container = styled.div`
   display: flex;
@@ -7,6 +8,7 @@ export const Container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: var(--b-blue);
 `;
 
 export const Form = styled.form`
@@ -28,6 +30,10 @@ export const Logo = styled.div`
   span {
     font-size: 15px;
   }
+`;
+
+export const LogoIcon = styled(MdShortText)`
+  color: #fff;
 `;
 
 export const Input = styled.input`

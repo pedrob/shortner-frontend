@@ -8,7 +8,8 @@ import {
   Logo,
   LogoutButton,
   UserSection,
-  LogoutIcon
+  LogoutIcon,
+  LogoIcon
 } from "./styles";
 
 const Header: React.FC = () => {
@@ -24,7 +25,10 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Logo>
-        Shortner
+        <div>
+          <LogoIcon />
+          Shortner
+        </div>
         <span>Encurtador de links</span>
       </Logo>
       <UserSection>

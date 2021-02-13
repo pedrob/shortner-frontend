@@ -5,7 +5,8 @@ export default createGlobalStyle`
     --blue: #1b9ca8;
     --l-blue: #16b1bf;
     --h-blue: #20c7d6;
-    --d-blue: #245D95;
+    --b-blue: #d0dfe0;
+    --d-blue: #1c67a5;
     --dh-blue: #3583cc;
     --l-gray: #d3d3d3;
     --d-gray: #505050;

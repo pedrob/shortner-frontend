@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AiOutlineLogout } from "react-icons/ai";
+import { MdShortText } from "react-icons/md";
 
 export const Container = styled.header`
   width: 100%;
@@ -21,6 +22,10 @@ export const Logo = styled.div`
   span {
     font-size: 8px;
   }
+`;
+
+export const LogoIcon = styled(MdShortText)`
+  color: #fff;
 `;
 
 export const UserSection = styled.section`

@@ -26,7 +26,7 @@ type Url = {
 };
 
 const Home: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors, reset } = useForm<Inputs>();
   const [urls, setUrls] = useState<Url[] | []>([]);
   const [fetchState, setFetchState] = useState<
     "initial" | "loading" | "resolved"
@@ -37,6 +37,7 @@ const Home: React.FC = () => {
       originalURL: dataForm.url
     });
     setUrls([...urls, data]);
+    reset();
   };
 
   useEffect(() => {
