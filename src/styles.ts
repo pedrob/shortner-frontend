@@ -3,6 +3,13 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   :root {
     --blue: #1b9ca8;
+    --l-blue: #16b1bf;
+    --h-blue: #20c7d6;
+    --d-blue: #245D95;
+    --dh-blue: #3583cc;
+    --l-gray: #d3d3d3;
+    --d-gray: #505050;
+    --error: #F64B4B;
   }
 
   * {
@@ -16,5 +23,12 @@ export default createGlobalStyle`
       font-size: 14px;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased !important;
+      .error {
+        box-shadow: 0 -1px 4px var(--error), 0 2px 4px var(--error);
+      }
+      .errorText {
+        color: var(--error);
+        margin-top: 4px;
+      }
   }
 `;

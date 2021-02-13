@@ -1,18 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Header from "../../components/Header";
 import UrlsList from "../../components/UrlsList";
 
-import { Container, Content, URLBar, URLInput, URLBarButton } from "./styles";
+import {
+  Container,
+  Content,
+  URLBar,
+  URLInput,
+  URLBarButton,
+  URLsNotFound
+} from "./styles";
+
+import api from "../../services/api";
 
 type Inputs = {
   url: string;
 };
 
+type Url = {
+  hash: string;
+  originalURL: string;
+  createdAt: string;
+};
+
 const Home: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
-  const onSubmit = (data: Inputs) => console.log(data);
+  const [urls, setUrls] = useState<Url[] | []>([]);
+  const [fetchState, setFetchState] = useState<
+    "initial" | "loading" | "resolved"
+  >("initial");
+
+  const onSubmit = async (dataForm: Inputs) => {
+    const { data } = await api.post("/urls", {
+      originalURL: dataForm.url
+    });
+    setUrls([...urls, data]);
+  };
+
+  useEffect(() => {
+    setFetchState("loading");
+    const getURLs = async () => {
+      const { data } = await api.get("/urls");
+      const urls = data.content;
+      setUrls(urls);
+      setFetchState("resolved");
+    };
+    getURLs();
+  }, []);
 
   return (
     <Container>
@@ -20,6 +56,7 @@ const Home: React.FC = () => {
       <Content>
         <URLBar onSubmit={handleSubmit(onSubmit)}>
           <URLInput
+            className={errors.url ? "error" : ""}
             name="url"
             defaultValue=""
             placeholder="Digite aqui a sua URL que será encurtada"
@@ -29,28 +66,20 @@ const Home: React.FC = () => {
             })}
           />
           <URLBarButton type="submit" value="Encurtar" />
-          {errors.url && errors.url.type === "required" && (
-            <span>Campo obrigatório</span>
-          )}
-          {errors.url && errors.url.type === "pattern" && (
-            <span>Padrão de URL inválido</span>
-          )}
         </URLBar>
+        {errors.url && errors.url.type === "required" && (
+          <span className="errorText">Campo obrigatório</span>
+        )}
+        {errors.url && errors.url.type === "pattern" && (
+          <span className="errorText">Padrão de URL inválido</span>
+        )}
         <span className="urlsSectionTitle">Minhas URLs</span>
-        <UrlsList
-          urls={[
-            {
-              hash: "sjand",
-              originalURL: "https://google.com",
-              createdAt: Date.now().toString()
-            },
-            {
-              hash: "sjbnd",
-              originalURL: "https://facebook.com",
-              createdAt: Date.now().toString()
-            }
-          ]}
-        />
+        {fetchState === "resolved" && urls.length > 0 && (
+          <UrlsList urls={urls} />
+        )}
+        {fetchState === "resolved" && urls.length === 0 && (
+          <URLsNotFound>Você não possui URLs registradas</URLsNotFound>
+        )}
       </Content>
     </Container>
   );

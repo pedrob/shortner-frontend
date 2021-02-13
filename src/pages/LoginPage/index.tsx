@@ -3,7 +3,14 @@ import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
 
-import { Container, Input, InputButton, Form, RegisterLink } from "./styles";
+import {
+  Container,
+  Input,
+  InputButton,
+  Form,
+  RegisterLink,
+  Logo
+} from "./styles";
 
 interface Inputs {
   username: string;
@@ -23,16 +30,33 @@ const LoginPage: React.FC = () => {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <Logo>
+          Shortner
+          <span>Encurtador de links</span>
+        </Logo>
         <Input
+          className={errors.username ? "error" : ""}
           name="username"
           defaultValue=""
           placeholder="Nome de usuário"
           ref={register({
-            required: true
+            required: true,
+            min: 4,
+            max: 20
           })}
         />
         {errors.username && errors.username.type === "required" && (
-          <span>Padrão de username inválido</span>
+          <span className="errorText">Campo obrigatório</span>
+        )}
+        {errors.username && errors.username.type === "min" && (
+          <span className="errorText">
+            Nome de usuário muito curto (menor que 4)
+          </span>
+        )}
+        {errors.username && errors.username.type === "max" && (
+          <span className="errorText">
+            Nome de usuário muito longo (maior que 20)
+          </span>
         )}
         <Input
           name="password"

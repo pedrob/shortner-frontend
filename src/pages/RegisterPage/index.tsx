@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
 
-import { Container, Input, InputButton, Form, RegisterLink } from "./styles";
+import { Container, Input, InputButton, Form, LoginLink, Logo } from "./styles";
 
 interface Inputs {
   username: string;
@@ -24,6 +24,10 @@ const RegisterPage: React.FC = () => {
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <Logo>
+          Shortner
+          <span>Encurtador de links</span>
+        </Logo>
         <Input
           name="username"
           defaultValue=""
@@ -50,8 +54,8 @@ const RegisterPage: React.FC = () => {
             required: true
           })}
         />
-        <RegisterLink to="/login">Já possui conta, entre aqui</RegisterLink>
-        <InputButton type="submit" value="Login" />
+        <LoginLink to="/login">Já possui conta, entre aqui</LoginLink>
+        <InputButton type="submit" value="Cadastrar" />
       </Form>
     </Container>
   );

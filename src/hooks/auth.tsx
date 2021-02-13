@@ -41,7 +41,6 @@ function useProvideAuth() {
     const token = getToken();
     if (token) {
       const { exp } = jwt_decode<{ exp: number }>(token);
-      console.log(exp);
       if (Date.now() > exp * 1000) {
         return false;
       }

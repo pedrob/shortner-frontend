@@ -18,7 +18,6 @@ const PrivateRoute: React.FC<{
   path: string;
   exact: boolean;
 }> = props => {
-  console.log(isAuthenticated());
   return isAuthenticated() ? (
     <Route path={props.path} exact={props.exact} component={props.component} />
   ) : (
