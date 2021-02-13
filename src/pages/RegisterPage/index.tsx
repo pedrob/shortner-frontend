@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import {
   Container,
@@ -24,9 +25,14 @@ const RegisterPage: React.FC = () => {
   const { push } = useHistory();
   const { register, handleSubmit, errors, getValues } = useForm<Inputs>();
   const onSubmit = async (data: Inputs) => {
-    delete data.confirmPassword;
-    await signUp(data.username, data.password);
-    push("/login");
+    try {
+      delete data.confirmPassword;
+      await signUp(data.username, data.password);
+      toast.success("Usuário criado com sucesso");
+      push("/login");
+    } catch (error) {
+      toast.error("Usuário já existe");
+    }
   };
 
   return (

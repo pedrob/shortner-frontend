@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import {
   Container,
@@ -23,9 +24,12 @@ const LoginPage: React.FC = () => {
   const { push } = useHistory();
   const { register, handleSubmit, errors } = useForm<Inputs>();
   const onSubmit = async (data: Inputs) => {
-    //TODO: add error tostify
-    await signIn(data.username, data.password);
-    push("/");
+    try {
+      await signIn(data.username, data.password);
+      push("/");
+    } catch (error) {
+      toast.error("Credenciais inválidas");
+    }
   };
 
   return (
