@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   useEffect(() => {
     const { sub } = jwt_decode<{ sub: string }>(getToken());
     setUsername(sub);
-  }, []);
+  }, [getToken]);
 
   return (
     <Container>

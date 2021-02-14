@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <React.Fragment>
       <Routes />
       <GlobalStyle />
-      <ToastContainer />
+      <ToastContainer hideProgressBar={true} />
     </React.Fragment>
   );
 };
