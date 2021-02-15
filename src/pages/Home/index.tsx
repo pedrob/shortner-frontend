@@ -33,11 +33,21 @@ const Home: React.FC = () => {
   >("initial");
 
   const onSubmit = async (dataForm: Inputs) => {
-    const { data } = await api.post("/urls", {
-      originalURL: dataForm.url
-    });
-    setUrls([...urls, data]);
-    reset();
+    if (dataForm.url.includes("https://") || dataForm.url.includes("http://")) {
+      const { data } = await api.post("/urls", {
+        originalURL: dataForm.url
+      });
+      setUrls([...urls, data]);
+      reset();
+    } else {
+      dataForm.url = "https://" + dataForm.url;
+      const { data } = await api.post("/urls", {
+        originalURL: dataForm.url
+      });
+      setUrls([...urls, data]);
+      reset();
+    }
+    // 	;
   };
 
   useEffect(() => {
@@ -63,7 +73,7 @@ const Home: React.FC = () => {
             placeholder="Digite aqui a sua URL que será encurtada"
             ref={register({
               required: true,
-              pattern: /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/
+              pattern: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
             })}
           />
           <URLBarButton type="submit" value="Encurtar" />
