@@ -43,6 +43,26 @@ export const UrlInfo = styled.li`
       -webkit-box-orient: vertical;
     }
   }
+
+  @media (max-width: 599px) {
+    flex-direction: column;
+    height: fit-content;
+    padding: 10px 10px 0 10px;
+    div {
+      align-items: flex-start;
+      width: 100%;
+      margin-bottom: 10px;
+      overflow: scroll;
+
+      span:first-child {
+        margin: 0;
+      }
+      a {
+        overflow: scroll;
+        text-align: left;
+      }
+    }
+  }
 `;
 
 export const CustomBsTrash = styled(BsTrash)`

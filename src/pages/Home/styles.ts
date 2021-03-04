@@ -14,9 +14,13 @@ export const Content = styled.main`
   align-self: center;
   flex-direction: column;
   margin-top: 80px;
+  padding: 20px 40px;
   .urlsSectionTitle {
     color: var(--d-gray);
     margin-top: 30px;
+  }
+  @media (max-width: 599px) {
+    margin-top: 20px;
   }
 `;
 
@@ -24,6 +28,9 @@ export const URLBar = styled.form`
   width: 100%;
   display: flex;
   border: none;
+  @media (max-width: 599px) {
+    flex-direction: column;
+  }
 `;
 
 export const URLInput = styled.input`
@@ -31,6 +38,10 @@ export const URLInput = styled.input`
   padding: 8px 5px;
   border: 1px solid var(--l-gray);
   border-radius: 4px;
+
+  @media (max-width: 599px) {
+    font-size: 10px;
+  }
 `;
 
 export const URLBarButton = styled.input`
@@ -43,6 +54,11 @@ export const URLBarButton = styled.input`
   cursor: pointer;
   :hover {
     background: var(--h-blue);
+  }
+
+  @media (max-width: 599px) {
+    margin-top: 10px;
+    padding: 5px;
   }
 `;
 
@@ -57,4 +73,8 @@ export const URLsNotFound = styled.div`
   border-radius: 4px;
   color: var(--d-blue);
   font-weight: bold;
+  @media (max-width: 599px) {
+    padding: 0 10px;
+    text-align: center;
+  }
 `;

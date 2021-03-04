@@ -22,6 +22,16 @@ export const Logo = styled.div`
   span {
     font-size: 8px;
   }
+  @media (max-width: 599px) {
+    max-width: 100px;
+    width: 100%;
+    div {
+      display: flex;
+    }
+    span {
+      font-size: 5px;
+    }
+  }
 `;
 
 export const LogoIcon = styled(MdShortText)`
@@ -35,6 +45,14 @@ export const UserSection = styled.section`
     color: var(--l-gray);
     font-size: 16px;
     margin-right: 20px;
+  }
+  @media (max-width: 599px) {
+    max-width: 100px;
+    width: 100%;
+    span {
+      font-size: 12px;
+      margin-right: 8px;
+    }
   }
 `;
 

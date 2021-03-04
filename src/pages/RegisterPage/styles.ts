@@ -18,6 +18,10 @@ export const Form = styled.form`
   width: 500px;
   padding: 40px 80px;
   border-radius: 4px;
+  @media (max-width: 599px) {
+    width: 300px;
+    padding: 20px 40px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -29,6 +33,11 @@ export const Logo = styled.div`
   align-items: center;
   span {
     font-size: 15px;
+  }
+  @media (max-width: 599px) {
+    div {
+      display: flex;
+    }
   }
 `;
 
