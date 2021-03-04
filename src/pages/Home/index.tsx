@@ -61,6 +61,11 @@ const Home: React.FC = () => {
     getURLs();
   }, []);
 
+  const removeUrl = async (hash: string) => {
+    await api.delete(`/urls/${hash}`);
+    setUrls(urls.filter(url => url.hash !== hash));
+  };
+
   return (
     <Container>
       <Header />
@@ -86,7 +91,7 @@ const Home: React.FC = () => {
         )}
         <span className="urlsSectionTitle">Minhas URLs</span>
         {fetchState === "resolved" && urls.length > 0 && (
-          <UrlsList urls={urls} />
+          <UrlsList removeUrl={removeUrl} urls={urls} />
         )}
         {fetchState === "resolved" && urls.length === 0 && (
           <URLsNotFound>Você não possui URLs registradas</URLsNotFound>

@@ -1,8 +1,9 @@
 // require('dotenv').configure();
 import React from "react";
 import * as dotenv from "dotenv";
+import api from "../../services/api";
 
-import { List, UrlInfo } from "./styles";
+import { List, UrlInfo, CustomBsTrash } from "./styles";
 
 dotenv.config({ path: __dirname + "/.env" });
 
@@ -14,6 +15,7 @@ type Url = {
 
 interface IProps {
   urls: Url[];
+  removeUrl: (hash: string) => void;
 }
 
 const parseDate = (date: string) => {
@@ -23,7 +25,7 @@ const parseDate = (date: string) => {
   return `${day} ${hour}`;
 };
 
-const UrlsList: React.FC<IProps> = ({ urls }) => {
+const UrlsList: React.FC<IProps> = ({ urls, removeUrl }) => {
   return (
     <List>
       {urls.map(url => (
@@ -46,6 +48,10 @@ const UrlsList: React.FC<IProps> = ({ urls }) => {
           <div>
             <span>Data</span>
             <span>{parseDate(url.createdAt)}</span>
+            <CustomBsTrash
+              title="Remover URL"
+              onClick={() => removeUrl(url.hash)}
+            />
           </div>
         </UrlInfo>
       ))}

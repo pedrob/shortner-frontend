@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BsTrash } from "react-icons/bs";
 
 export const List = styled.ul`
   display: flex;
@@ -14,13 +15,15 @@ export const UrlInfo = styled.li`
   margin-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  position: relative;
   div {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--d-gray);
     overflow: hidden;
+    width: 32%;
 
     span:first-child {
       color: var(--d-blue);
@@ -34,11 +37,19 @@ export const UrlInfo = styled.li`
         color: var(--blue);
       }
       overflow: hidden;
-      width: 300px;
       text-align: center;
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
     }
   }
+`;
+
+export const CustomBsTrash = styled(BsTrash)`
+  color: red;
+  position: absolute;
+  font-size: 20px;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
 `;
