@@ -67,6 +67,11 @@ export const InputButton = styled.input`
   }
 `;
 
+export const WaitingButton = styled(InputButton)`
+  background-color: #c3c3c3;
+  color: #000;
+`;
+
 export const RegisterLink = styled(Link)`
   text-decoration: none;
   color: var(--l-gray);

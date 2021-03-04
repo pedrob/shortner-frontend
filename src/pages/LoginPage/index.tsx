@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,8 @@ import {
   Form,
   RegisterLink,
   Logo,
-  LogoIcon
+  LogoIcon,
+  WaitingButton
 } from "./styles";
 
 interface Inputs {
@@ -20,16 +21,19 @@ interface Inputs {
 }
 
 const LoginPage: React.FC = () => {
+  const [fetchState, setFetchState] = useState<"initial" | "loading">(
+    "initial"
+  );
   const { signIn } = useAuth();
   const { push } = useHistory();
   const { register, handleSubmit, errors } = useForm<Inputs>();
   const onSubmit = async (data: Inputs) => {
     try {
+      setFetchState("loading");
       await signIn(data.username, data.password);
       push("/");
     } catch (error) {
       toast.error("Credenciais inválidas");
-      //
     }
   };
 
@@ -87,7 +91,12 @@ const LoginPage: React.FC = () => {
         <RegisterLink to="/registrar">
           Não possui conta, registre-se aqui
         </RegisterLink>
-        <InputButton type="submit" value="Login" />
+        {fetchState === "initial" && (
+          <InputButton type="submit" value="Login" />
+        )}
+        {fetchState === "loading" && (
+          <WaitingButton type="submit" value="Aguarde..." />
+        )}
       </Form>
     </Container>
   );
