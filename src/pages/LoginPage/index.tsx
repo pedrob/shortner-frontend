@@ -34,6 +34,7 @@ const LoginPage: React.FC = () => {
       push("/");
     } catch (error) {
       toast.error("Credenciais inválidas");
+      setFetchState("initial");
     }
   };
 
